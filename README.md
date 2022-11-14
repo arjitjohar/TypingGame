@@ -1,2 +1,2 @@
-# excersize-website
-a tool to learn what excersizes works best for you!
+# Typing Game!
+a tool to see how fast you can type!
