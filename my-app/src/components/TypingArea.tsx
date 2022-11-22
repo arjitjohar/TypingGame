@@ -80,28 +80,23 @@ const TypingArea = () => {
   }, []);
 
   return (
-    <div className="">
-      <StopClock seconds={currentTime} />
-      <div>
-        <TypingText
-          activeWord={activeWord}
-          correct_arr={correctArr}
-          text={sampleStringArr}
-        />
-        <label
-          htmlFor="message"
-          className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-        ></label>
-      </div>
-
-      <div>
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center">
+        <div className="flex flex-row">
+          <TypingText
+            text={sampleStringArr}
+            correct_arr={correctArr}
+            activeWord={activeWord}
+          />
+        </div>
         <textarea
-          id="message"
-          className="block resize-none p-2.5 w-full text-sm text-gray-900 bg-gray-50  border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Type the paragraph here..."
-          value={message}
+          className="w-96 h-32 border-2 border-gray-300 rounded-lg"
           onChange={handleMessageChange}
-        ></textarea>
+          value={message}
+        />
+      </div>
+      <div className="flex flex-row">
+        <StopClock seconds={currentTime} />
       </div>
     </div>
   );
