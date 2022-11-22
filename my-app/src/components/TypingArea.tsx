@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import StopClock from "./StopClock";
 import TypingText from "./TypingText";
 
@@ -14,13 +14,12 @@ const TypingArea = () => {
   const [currentTime, setCurrentTime] = useState<number>(0);
 
   const [isStarted, setisStarted] = useState<boolean>(false);
+  const [isFinished, setisFinished] = useState<boolean>(false);
 
-  const [WPM, setWPM] = useState<number>(0);
-
-  const sampleString =
-    "I checked in for the night at Out O The Way motel. What a bad choice that was. First I took a shower and a spider crawled out of the drain. Next, the towel rack fell down when I reached for the one small bath towel. This allowed the towel to fall halfway into the toilet. I tried to watch a movie, but the remote control was sticky and wouldn’t stop scrolling through the channels. I gave up for the night and crawled into bed. I stretched out my leg and felt something furry by my foot. Filled with fear, I reached down and to my surprise, I pulled out a raccoon skin pair of underwear. After my initial relief that it wasn/’t alive, the image of a fat, ugly businessman wearing raccoon skin briefs filled my brain. I jumped out of the bed, threw my toothbrush into my bag, and sprinted towards my car.";
+  const sampleString = "I checked in for the night at Out O The Way motel.";
 
   const sampleStringArr = sampleString.split(" ");
+  const sampleStringLength = sampleStringArr.length;
 
   useEffect(() => {
     if (isStarted) {
@@ -31,7 +30,7 @@ const TypingArea = () => {
   }, [isStarted]);
 
   const handleMessageChange = (event: any) => {
-    // 👇️ access textarea value9
+    // 👇️ access textarea value
 
     setMessage(event.target.value);
     let arr = event.target.value.split(" ");
@@ -51,9 +50,10 @@ const TypingArea = () => {
 
           return arr;
         });
+        setMessage(" ");
 
         //when its wrong
-      } else if (arr.at(-2) != sampleStringArr[activeWord]) {
+      } else if (arr.at(-2) !== sampleStringArr[activeWord]) {
         setcorrectArr((data) => {
           const arr = [...data];
 
@@ -63,7 +63,10 @@ const TypingArea = () => {
 
           return arr;
         });
-      } else if (arr.at(-2) == sampleStringArr[-1]) {
+        setMessage(" ");
+      } else if (arr.at(-2) === sampleStringArr[-1]) {
+        setMessage("");
+        setisStarted(false);
       }
     }
 
@@ -72,7 +75,7 @@ const TypingArea = () => {
 
   useEffect(() => {
     const arr = Array(sampleStringArr.length + 1).fill(NOT_SEEN);
-    arr[arr.length - 1] = RIGHT;
+
     setcorrectArr(arr);
   }, []);
 
