@@ -76,7 +76,11 @@ const TypingArea = () => {
       //if the last word is typed
       if (activeWord == sampleStringArrLength - 1) {
         setisFinished(true);
-        alert("Congrats! You finished in " + currentTime + " seconds!");
+
+        //create an alert that says your wpm is x
+        alert(
+          "Your WPM is " + Math.round((activeWord / currentTime) * 60) + "!"
+        );
         setFinishTest(true);
       }
     }
@@ -99,6 +103,10 @@ const TypingArea = () => {
   }, [isFinished]);
 
   return (
+    // 👇️ textarea element
+
+    //move everything to the center of the screen
+
     <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-100">
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-center">
