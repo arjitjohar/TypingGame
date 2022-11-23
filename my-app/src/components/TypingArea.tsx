@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StopClock from "./StopClock";
 import TypingText from "./TypingText";
-import ParticleBackground from "./ParticleBackground"
+import ParticleBackground from "./ParticleBackground";
 
 const TypingArea = () => {
   const [message, setMessage] = useState<string>("");
@@ -120,7 +120,7 @@ const TypingArea = () => {
             />
           </div>
           <textarea
-            className="w-96 h-10 border-4 border-red-300 rounded-lg overflow-auto"
+            className="w-96 h-32 border-2 border-gray-300 rounded-lg"
             onChange={handleMessageChange}
             value={message}
           />
