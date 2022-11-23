@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import StopClock from "./StopClock";
 import TypingText from "./TypingText";
 
@@ -14,20 +14,25 @@ const TypingArea = () => {
   const [currentTime, setCurrentTime] = useState<number>(0);
 
   const [isStarted, setisStarted] = useState<boolean>(false);
-  const [isFinished, setisFinished] = useState<boolean>(false);
 
   const sampleString = "I checked in for the night at Out O The Way motel.";
 
   const sampleStringArr = sampleString.split(" ");
-  const sampleStringLength = sampleStringArr.length;
+  const sampleStringArrLength = sampleStringArr.length;
+  const [isFinished, setisFinished] = useState<boolean>(false);
 
+  //create useState called FinishTest
+  const [FinishTest, setFinishTest] = useState<boolean>(false);
+
+  //increment a timer every second
   useEffect(() => {
-    if (isStarted) {
-      setInterval(() => {
-        setCurrentTime((oldTime) => oldTime + 1);
+    if (isStarted && !isFinished && !FinishTest) {
+      const timer = setTimeout(() => {
+        setCurrentTime((currentTime) => currentTime + 1);
       }, 1000);
+      return () => clearTimeout(timer);
     }
-  }, [isStarted]);
+  }, [isStarted, currentTime]);
 
   const handleMessageChange = (event: any) => {
     // 👇️ access textarea value
@@ -35,6 +40,8 @@ const TypingArea = () => {
     setMessage(event.target.value);
     let arr = event.target.value.split(" ");
     setisStarted(true);
+    setisFinished(false);
+
     //update the array
     if (
       arr.at(-1) === "" &&
@@ -64,9 +71,13 @@ const TypingArea = () => {
           return arr;
         });
         setMessage(" ");
-      } else if (arr.at(-2) === sampleStringArr[-1]) {
-        setMessage("");
-        setisStarted(false);
+      }
+
+      //if the last word is typed
+      if (activeWord == sampleStringArrLength - 1) {
+        setisFinished(true);
+        alert("Congrats! You finished in " + currentTime + " seconds!");
+        setFinishTest(true);
       }
     }
 
@@ -79,24 +90,34 @@ const TypingArea = () => {
     setcorrectArr(arr);
   }, []);
 
+  //stop timer with isFinished is true
+  useEffect(() => {
+    if (isFinished) {
+      setisStarted(false);
+      setisFinished(false);
+    }
+  }, [isFinished]);
+
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-100">
       <div className="flex flex-col items-center">
-        <div className="flex flex-row">
-          <TypingText
-            text={sampleStringArr}
-            correct_arr={correctArr}
-            activeWord={activeWord}
+        <div className="flex flex-col items-center">
+          <div className="flex flex-row">
+            <TypingText
+              text={sampleStringArr}
+              correct_arr={correctArr}
+              activeWord={activeWord}
+            />
+          </div>
+          <textarea
+            className="w-96 h-32 border-2 border-gray-300 rounded-lg"
+            onChange={handleMessageChange}
+            value={message}
           />
         </div>
-        <textarea
-          className="w-96 h-32 border-2 border-gray-300 rounded-lg"
-          onChange={handleMessageChange}
-          value={message}
-        />
-      </div>
-      <div className="flex flex-row">
-        <StopClock seconds={currentTime} />
+        <div className="flex flex-row">
+          <StopClock seconds={currentTime} />
+        </div>
       </div>
     </div>
   );

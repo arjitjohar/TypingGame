@@ -11,30 +11,21 @@ const Word = (props: Props) => {
 
   const [NOT_SEEN, WRONG, RIGHT] = [0, 1, 2];
 
-  const word_logic = () => {
+  //make a function that makes the word red if its wrong, green if its right, and bold black if its not seen and bold if its active
+  const getStyle = () => {
     if (correct == NOT_SEEN) {
       if (active) {
-        return <span className="font-bold"> {text} </span>;
+        return "font-bold";
       } else {
-        return <span className="font-normal"> {text} </span>;
+        return "font-normal";
       }
-    }
-    if (correct == WRONG) {
-      if (active) {
-        return <span className="font-bold text-red-500 "> {text} </span>;
-      } else {
-        return <span className="text-red-500"> {text}</span>;
-      }
-    }
-    if (correct == RIGHT) {
-      if (active) {
-        return <span className="font-bold text-green-500">{text} </span>;
-      } else {
-        return <span className="font-normal text-green-500"> {text}</span>;
-      }
+    } else if (correct == WRONG) {
+      return "text-red-500 font-bold";
+    } else if (correct == RIGHT) {
+      return "text-green-500 font-bold";
     }
   };
 
-  return <span>{word_logic()}</span>;
+  return <span className={getStyle()}>{text + " "}</span>;
 };
 export default Word;

@@ -11,8 +11,6 @@ const TypingText = (props: TypingTextProps) => {
   //you must set the type of each useState
   const { text, activeWord, correct_arr } = props;
 
-  const [NOT_SEEN, WRONG, RIGHT] = [0, 1, 2];
-
   return (
     <div className="">
       <a
