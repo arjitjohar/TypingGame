@@ -8,11 +8,18 @@ import axios from "axios";
 
 //from /paragraph endpoint, get the paragraph
 
+//TODO: create a reset button
+
+
 const TypingArea = () => {
   const [message, setMessage] = useState<string>("");
 
   //use state to store the paragraph
   const [paragraph, setParagraph] = useState<string>("");
+
+  const [reload, setReload] = useState<boolean>(false);
+
+
   //get the paragraph from the API
   useEffect(() => {
     axios
@@ -23,7 +30,7 @@ const TypingArea = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [reload]);
 
   const [activeWord, setactiveWord] = useState(0);
 
@@ -42,6 +49,8 @@ const TypingArea = () => {
 
   //create useState called FinishTest
   const [FinishTest, setFinishTest] = useState<boolean>(false);
+
+
 
   //increment a timer every second
   useEffect(() => {
@@ -127,9 +136,12 @@ const TypingArea = () => {
     //move everything to the center of the screen
 
     <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-300 ">
-      <ParticleBackground />
+    
+
+     
+      <ParticleBackground  />
       <div className="flex flex-col justify-center items-center w-full h-screen">
-        <div className="flex flex-col justify-evenly items-center w-5/6 my-1 ">
+        <div className="flex flex-col justify-evenly items-center w-5/6 my-1 z-20">
           <div className="flex flex-row ">
             <TypingText
               text={sampleStringArr}
@@ -139,14 +151,23 @@ const TypingArea = () => {
           </div>
         </div>
         <textarea
-          className="w-96 h-12  border-2 border-gray-300 resize-none "
+          className="w-96 h-12  border-2 border-gray-300 resize-none z-20 "
           onChange={handleMessageChange}
           value={message}
         />
+
+
+        <div className="flex space-x-5 my-8 z-20">
+        <button className="bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => { setFinishTest(false); setCurrentTime(0); setactiveWord(0); setcorrectArr([]); setisStarted(false); setisFinished(false); setMessage(""); } }>Reset</button>
+        <button className="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => { setReload(!reload); setFinishTest(false); setCurrentTime(0); setactiveWord(0); setcorrectArr([]); setisStarted(false); setisFinished(false); setMessage(""); } }>New Paragraph</button>
       </div>
+      </div>
+      
       <div className="flex flex-row text-xl">
         <StopClock seconds={currentTime} />
       </div>
+
+      
     </div>
   );
 };
