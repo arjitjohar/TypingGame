@@ -108,10 +108,10 @@ const TypingArea = () => {
 
     //move everything to the center of the screen
 
-    <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-100 border-4 border-red-300">
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-300 border-4 border-red-300">
       <ParticleBackground />
       <div className="flex flex-col justify-center items-center border-2 border-indigo-300 w-full h-screen">
-        <div className="flex flex-col justify-evenly items-center border-2 border-orange-300 w-5/6 my-2 h-64">
+        <div className="flex flex-col justify-evenly items-center border-2 border-orange-300 bg-black w-5/6 my-2 h-64">
           <div className="flex flex-row border-4 border-green-300">
             <TypingText
               text={sampleStringArr}
