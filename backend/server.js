@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const txtgen = require("txtgen/dist/cjs/txtgen.js");
 const port = 8080;
 
 // We are using our packages here
@@ -20,17 +21,11 @@ app.get("/", (req, res) => {
   res.send("Welcome to your server");
 });
 
-//Route that handles login logic
-app.post("/login", (req, res) => {
-  console.log(req.body.username);
-  console.log(req.body.password);
-});
+//route that grabs a random paragraph from https://unpkg.com/txtgen@3.0.4/dist/txtgen.min.js
+app.get("/paragraph", (req, res) => {
+  const paragraph = txtgen.paragraph();
 
-//Route that handles signup logic
-app.post("/signup", (req, res) => {
-  console.log(req.body.fullname);
-  console.log(req.body.username);
-  console.log(req.body.password);
+  res.send(paragraph);
 });
 
 //Start your server on a specified port

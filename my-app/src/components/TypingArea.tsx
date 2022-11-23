@@ -3,8 +3,27 @@ import StopClock from "./StopClock";
 import TypingText from "./TypingText";
 import ParticleBackground from "./ParticleBackground";
 
+//import axios to the react app
+import axios from "axios";
+
+//from /paragraph endpoint, get the paragraph
+
 const TypingArea = () => {
   const [message, setMessage] = useState<string>("");
+
+  //use state to store the paragraph
+  const [paragraph, setParagraph] = useState<string>("");
+  //get the paragraph from the API
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/paragraph")
+      .then((res) => {
+        setParagraph(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const [activeWord, setactiveWord] = useState(0);
 
@@ -15,8 +34,7 @@ const TypingArea = () => {
   const [currentTime, setCurrentTime] = useState<number>(0);
 
   const [isStarted, setisStarted] = useState<boolean>(false);
-
-  const sampleString = "I checked in for the night at Out O The Way motel.";
+  const sampleString = paragraph;
 
   const sampleStringArr = sampleString.split(" ");
   const sampleStringArrLength = sampleStringArr.length;
@@ -108,26 +126,26 @@ const TypingArea = () => {
 
     //move everything to the center of the screen
 
-    <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-300 border-4 border-red-300">
+    <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-300 ">
       <ParticleBackground />
-      <div className="flex flex-col justify-center items-center border-2 border-indigo-300 w-full h-screen">
-        <div className="flex flex-col justify-evenly items-center border-2 border-orange-300 bg-black w-5/6 my-2 h-64">
-          <div className="flex flex-row border-4 border-green-300">
+      <div className="flex flex-col justify-center items-center border-2 border-spacing-32 w-full h-screen">
+        <div className="flex flex-col justify-evenly items-center w-5/6 my-1 h-64">
+          <div className="flex flex-row ">
             <TypingText
               text={sampleStringArr}
               correct_arr={correctArr}
               activeWord={activeWord}
             />
           </div>
-          <textarea
-            className="w-96 h-32 border-2 border-gray-300 rounded-lg"
-            onChange={handleMessageChange}
-            value={message}
-          />
         </div>
-        <div className="flex flex-row text-xl">
-          <StopClock seconds={currentTime} />
-        </div>
+        <textarea
+          className="w-96 h-12  border-2 border-gray-300 resize-none "
+          onChange={handleMessageChange}
+          value={message}
+        />
+      </div>
+      <div className="flex flex-row text-xl">
+        <StopClock seconds={currentTime} />
       </div>
     </div>
   );

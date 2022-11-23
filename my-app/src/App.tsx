@@ -6,7 +6,6 @@ function App() {
   return (
     <div className="bg-black">
       <TypingArea />
-      thisdfasasdfasdfasdfasdfw
     </div>
   );
 }
