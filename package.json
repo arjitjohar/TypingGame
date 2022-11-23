@@ -1,0 +1,29 @@
+{
+  "name": "typinggame",
+  "version": "1.0.0",
+  "description": "a tool to see how fast you can type!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm start --prefix my-app",
+    "server": "npm start --prefix backend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+
+
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arjitjohar/TypingGame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arjitjohar/TypingGame/issues"
+  },
+  "homepage": "https://github.com/arjitjohar/TypingGame#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}

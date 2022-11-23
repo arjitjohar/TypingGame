@@ -1,12 +1,39 @@
-const express = require("express"); //Line 1
-const app = express(); //Line 2
-const port = process.env.PORT || 9000; //Line 3
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const port = 8080;
 
-// This displays message that the server running and listening to specified port
-app.listen(port, () => console.log(`Listening on port ${port}`)); //Line 6
+// We are using our packages here
+app.use(bodyParser.json()); // to support JSON-encoded bodies
 
-// create a GET route
-app.get("/express_backend", (req, res) => {
-  //Line 9
-  res.send({ express: "YOUR EXPRESS BACKEND IS CONNECTED TO REACT" }); //Line 10
-}); //Line 11
+app.use(
+  bodyParser.urlencoded({
+    // to support URL-encoded bodies
+    extended: true,
+  })
+);
+app.use(cors());
+
+//You can use this to check if your server is working
+app.get("/", (req, res) => {
+  res.send("Welcome to your server");
+});
+
+//Route that handles login logic
+app.post("/login", (req, res) => {
+  console.log(req.body.username);
+  console.log(req.body.password);
+});
+
+//Route that handles signup logic
+app.post("/signup", (req, res) => {
+  console.log(req.body.fullname);
+  console.log(req.body.username);
+  console.log(req.body.password);
+});
+
+//Start your server on a specified port
+app.listen(port, () => {
+  console.log(`Server is runing on port ${port}`);
+});
