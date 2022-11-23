@@ -128,8 +128,8 @@ const TypingArea = () => {
 
     <div className="flex flex-col items-center justify-center w-full h-screen bg-blue-300 ">
       <ParticleBackground />
-      <div className="flex flex-col justify-center items-center border-2 border-spacing-32 w-full h-screen">
-        <div className="flex flex-col justify-evenly items-center w-5/6 my-1 h-64">
+      <div className="flex flex-col justify-center items-center w-full h-screen">
+        <div className="flex flex-col justify-evenly items-center w-5/6 my-1 ">
           <div className="flex flex-row ">
             <TypingText
               text={sampleStringArr}

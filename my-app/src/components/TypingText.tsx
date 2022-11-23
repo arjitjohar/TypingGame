@@ -17,7 +17,7 @@ const TypingText = (props: TypingTextProps) => {
         href="#"
         className="block p-6 max-w-fit bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
       >
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
           Type as fast as you can!
         </h5>
         <p className=" text-gray-700 dark:text-gray-400 border-2 border-sky-500">
