@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 //route that grabs a random paragraph from https://unpkg.com/txtgen@3.0.4/dist/txtgen.min.js
 app.get("/paragraph", (req, res) => {
   const paragraph = txtgen.paragraph();
+  
 
   res.send(paragraph);
 });
