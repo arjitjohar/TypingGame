@@ -4,14 +4,16 @@
   "description": "a tool to see how fast you can type!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm start --prefix my-app",
     "server": "npm start --prefix backend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
-
-
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
 
   },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/arjitjohar/TypingGame.git"
@@ -25,5 +27,5 @@
   "homepage": "https://github.com/arjitjohar/TypingGame#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
-  }
+  },
 }
