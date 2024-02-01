@@ -27,5 +27,7 @@
   "homepage": "https://github.com/arjitjohar/TypingGame#readme",
   "dependencies": {
     "concurrently": "^7.6.0"
-  },
+  }
+
+  
 }
