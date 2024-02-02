@@ -26,7 +26,8 @@
   },
   "homepage": "https://github.com/arjitjohar/TypingGame#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "react-scripts": "5.0.1"
   }
 
   
